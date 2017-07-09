@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/com/guimei/shop/action/AddGoodsToShopCarAction.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/guimei/shop/action/LoginAction.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/guimei/shop/action/RegisterAction.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/guimei/shop/action/UploadImageAction.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/guimei/shop/framework/ActionClass.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/guimei/shop/test/GuiMeiDaoTest.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/guimei/shop/util/SessionUtil.java" charset="GBK" />
+  </component>
+</project>
