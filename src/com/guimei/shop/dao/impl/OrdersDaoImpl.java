@@ -2,6 +2,7 @@ package com.guimei.shop.dao.impl;
 
 import com.guimei.shop.bean.GoodsImage;
 import com.guimei.shop.bean.Orders;
+import com.guimei.shop.dao.DaoFactory;
 import com.guimei.shop.dao.GoodsImageDao;
 import com.guimei.shop.dao.OrdersDao;
 import com.guimei.shop.framework.GuiMeiDao;
@@ -27,7 +28,7 @@ public class OrdersDaoImpl extends GuiMeiDao<Orders> implements OrdersDao {
                 orderBy("-createTime")
         );
 
-        GoodsImageDao goodsImageDao = new GoodsImageDaoImpl();
+        GoodsImageDao goodsImageDao = DaoFactory.getGoodsImageDao();
         for (Orders orders : ordersList) {
             List<GoodsImage> goodsImageList = goodsImageDao.queryByGoodsId(orders.getGoods().getGoodsId());
             orders.getGoods().setGoodsImageList(goodsImageList);

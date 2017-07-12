@@ -2,8 +2,8 @@ package com.guimei.shop.action;
 
 import com.guimei.shop.bean.Customer;
 import com.guimei.shop.dao.CustomerDao;
-import com.guimei.shop.dao.impl.CustomerDaoImpl;
-import com.guimei.shop.framework.ActionClass;
+import com.guimei.shop.dao.DaoFactory;
+import com.guimei.shop.framework.ActionSupport;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * by wangrongjun on 2017/6/22.
  */
-public class UploadImageAction extends ActionClass {
+public class UploadImageAction extends ActionSupport {
     @Override
     protected String execute() throws ServletException, IOException, ParamErrorException, CustomerNotExistsException {
         Customer customer = checkCustomer();
@@ -62,7 +62,7 @@ public class UploadImageAction extends ActionClass {
 
         switch (state) {
             case 0:
-                CustomerDao customerDao = new CustomerDaoImpl();
+                CustomerDao customerDao = DaoFactory.getCustomerDao();
                 customerDao.updateHeadUrl(customer.getCustomerId(), url);
                 customer.setHeadUrl(url);
                 request.setAttribute("msg", "上传成功");

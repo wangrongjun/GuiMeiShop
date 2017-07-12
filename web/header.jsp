@@ -1,8 +1,7 @@
 <%@ page import="com.guimei.shop.bean.Customer" %>
+<%@ page import="com.guimei.shop.dao.DaoFactory" %>
 <%@ page import="com.guimei.shop.dao.OrdersDao" %>
 <%@ page import="com.guimei.shop.dao.ShopCarDao" %>
-<%@ page import="com.guimei.shop.dao.impl.OrdersDaoImpl" %>
-<%@ page import="com.guimei.shop.dao.impl.ShopCarDaoImpl" %>
 <%--
   Created by IntelliJ IDEA.
   User: wangrongjun
@@ -30,9 +29,9 @@
         <a href="register.jsp">注册</a>
         <%
         } else {
-            ShopCarDao shopCarDao = new ShopCarDaoImpl();
+            ShopCarDao shopCarDao = DaoFactory.getShopCarDao();
             int shopCarCount = shopCarDao.queryCountByCustomerId(customer.getCustomerId());
-            OrdersDao ordersDao = new OrdersDaoImpl();
+            OrdersDao ordersDao = DaoFactory.getOrdersDao();
             int ordersCount = ordersDao.queryCountByCustomerId(customer.getCustomerId());
         %>
         <a href="customer_info.jsp"><%=customer.getNickname()%>

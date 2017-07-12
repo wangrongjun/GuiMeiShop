@@ -1,6 +1,7 @@
 package com.guimei.shop.dao.impl;
 
 import com.guimei.shop.bean.Goods;
+import com.guimei.shop.dao.DaoFactory;
 import com.guimei.shop.dao.GoodsDao;
 import com.guimei.shop.dao.GoodsImageDao;
 import com.guimei.shop.dao.OrdersDao;
@@ -27,8 +28,8 @@ public class GoodsDaoImpl extends GuiMeiDao<Goods> implements GoodsDao {
         List<Goods> goodsList = super.executeQuery(sql, maxQueryForeignKeyLevel,
                 ignoreReferenceList, requiredReferenceVariableList);
 
-        GoodsImageDao goodsImageDao = new GoodsImageDaoImpl();
-        OrdersDao ordersDao = new OrdersDaoImpl();
+        GoodsImageDao goodsImageDao = DaoFactory.getGoodsImageDao();
+        OrdersDao ordersDao = DaoFactory.getOrdersDao();
         for (Goods goods : goodsList) {
             goods.setGoodsImageList(goodsImageDao.queryByGoodsId(goods.getGoodsId()));
             goods.setSellCount(ordersDao.queryCountByGoodsId(goods.getGoodsId()));

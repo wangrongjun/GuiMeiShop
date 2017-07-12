@@ -2,7 +2,6 @@ package com.guimei.shop.test;
 
 import com.guimei.shop.bean.*;
 import com.guimei.shop.dao.*;
-import com.guimei.shop.dao.impl.*;
 import com.wang.java_util.GsonUtil;
 import org.junit.Before;
 import org.junit.Test;
@@ -190,16 +189,16 @@ public class GuiMeiDaoTest {
 
     @Before
     public void init() {
-        goodsTypeDao = new GoodsTypeDaoImpl();
-        customerDao = new CustomerDaoImpl();
-        sellerDao = new SellerDaoImpl();
-        shopDao = new ShopDaoImpl();
-        goodsDao = new GoodsDaoImpl();
-        goodsImageDao = new GoodsImageDaoImpl();
-        ordersDao = new OrdersDaoImpl();
-        shopCarDao = new ShopCarDaoImpl();
-        evaluateDao = new EvaluateDaoImpl();
-        addressDao = new AddressDaoImpl();
+        goodsTypeDao = DaoFactory.getGoodsTypeDao();
+        customerDao = DaoFactory.getCustomerDao();
+        sellerDao = DaoFactory.getSellerDao();
+        shopDao = DaoFactory.getShopDao();
+        goodsDao = DaoFactory.getGoodsDao();
+        goodsImageDao = DaoFactory.getGoodsImageDao();
+        ordersDao = DaoFactory.getOrdersDao();
+        shopCarDao = DaoFactory.getShopCarDao();
+        evaluateDao = DaoFactory.getEvaluateDao();
+        addressDao = DaoFactory.getAddressDao();
     }
 
 }

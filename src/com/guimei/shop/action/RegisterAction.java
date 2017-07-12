@@ -3,11 +3,9 @@ package com.guimei.shop.action;
 import com.guimei.shop.bean.Customer;
 import com.guimei.shop.bean.Seller;
 import com.guimei.shop.dao.CustomerDao;
+import com.guimei.shop.dao.DaoFactory;
 import com.guimei.shop.dao.SellerDao;
-import com.guimei.shop.dao.impl.CustomerDaoImpl;
-import com.guimei.shop.dao.impl.SellerDaoImpl;
-import com.guimei.shop.framework.ActionClass;
-import com.wang.java_util.FileUtil;
+import com.guimei.shop.framework.ActionSupport;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
@@ -15,7 +13,7 @@ import java.io.IOException;
 /**
  * by wangrongjun on 2017/6/18.
  */
-public class RegisterAction extends ActionClass {
+public class RegisterAction extends ActionSupport {
     @Override
     protected String execute() throws ServletException, IOException, ParamErrorException, CustomerNotExistsException {
         String phone = checkStringParameter("phone");
@@ -26,7 +24,7 @@ public class RegisterAction extends ActionClass {
         String identity = checkStringParameter("identity");
 
         if (identity.equals("customer")) {
-            CustomerDao customerDao = new CustomerDaoImpl();
+            CustomerDao customerDao = DaoFactory.getCustomerDao();
             if (customerDao.queryExists(phone)) {
                 request.setAttribute("msg", "该手机号已注册");
                 return "register.jsp";
@@ -40,7 +38,7 @@ public class RegisterAction extends ActionClass {
             return "login.jsp";
         } else {
 
-            SellerDao sellerDao = new SellerDaoImpl();
+            SellerDao sellerDao = DaoFactory.getSellerDao();
             if (sellerDao.queryExists(phone)) {
                 request.setAttribute("msg", "该手机号已注册");
                 return "register.jsp";

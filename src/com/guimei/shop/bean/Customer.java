@@ -4,9 +4,13 @@ import com.wang.db2.Column;
 import com.wang.db2.Id;
 import com.wang.db2.Ignore;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+
 /**
  * by wangrongjun on 2017/6/16.
  */
+@Entity
 public class Customer {
 
     @Ignore
@@ -15,6 +19,8 @@ public class Customer {
     public static final int GENDER_MAN = 1;
 
     @Id
+    @javax.persistence.Id
+    @GeneratedValue
     private int customerId;
     @Column(length = 20, nullable = false, unique = true)
     private String phone;

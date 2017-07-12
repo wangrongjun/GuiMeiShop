@@ -3,9 +3,9 @@ package com.guimei.shop.action;
 import com.guimei.shop.bean.Customer;
 import com.guimei.shop.bean.Goods;
 import com.guimei.shop.bean.Orders;
+import com.guimei.shop.dao.DaoFactory;
 import com.guimei.shop.dao.OrdersDao;
-import com.guimei.shop.dao.impl.OrdersDaoImpl;
-import com.guimei.shop.framework.ActionClass;
+import com.guimei.shop.framework.ActionSupport;
 import com.wang.java_util.DateUtil;
 import com.wang.java_util.GsonUtil;
 
@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * by wangrongjun on 2017/6/20.
  */
-public class CreateOrderAction extends ActionClass {
+public class CreateOrderAction extends ActionSupport {
     @Override
     protected String execute() throws ServletException, IOException, ParamErrorException, CustomerNotExistsException {
         Customer customer = checkCustomer();
@@ -34,7 +34,7 @@ public class CreateOrderAction extends ActionClass {
             return "-error_param.jsp";
         }
 
-        OrdersDao ordersDao = new OrdersDaoImpl();
+        OrdersDao ordersDao = DaoFactory.getOrdersDao();
         customer = new Customer(customer.getCustomerId());
         Orders orders = new Orders(customer, goods, count, count * goods.getPrice(),
                 phone, receiverName, address, DateUtil.getCurrentDateAndTime(), Orders.STATE_CONTINUTE);

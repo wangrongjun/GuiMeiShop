@@ -36,7 +36,7 @@ public class Controller extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             LogUtil.print(e.toString());
-            response.sendRedirect("404.jsp");
+            response.sendRedirect("error_404.jsp");
         }
     }
 

@@ -1,9 +1,9 @@
 package com.guimei.shop.action;
 
 import com.guimei.shop.bean.Goods;
+import com.guimei.shop.dao.DaoFactory;
 import com.guimei.shop.dao.GoodsDao;
-import com.guimei.shop.dao.impl.GoodsDaoImpl;
-import com.guimei.shop.framework.ActionClass;
+import com.guimei.shop.framework.ActionSupport;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
@@ -12,14 +12,14 @@ import java.util.List;
 /**
  * by wangrongjun on 2017/6/21.
  */
-public class SearchAction extends ActionClass {
+public class SearchAction extends ActionSupport {
     @Override
-    protected String execute() throws ActionClass.ParamErrorException, ServletException, IOException {
+    protected String execute() throws ActionSupport.ParamErrorException, ServletException, IOException {
         String searchWord = checkStringParameter("searchWord");
         int pageIndex = getIntegerParameter("pageIndex", 0);
         int sortType = getIntegerParameter("sortType", 0);
 
-        GoodsDao goodsDao = new GoodsDaoImpl();
+        GoodsDao goodsDao = DaoFactory.getGoodsDao();
         int totalCount = goodsDao.queryCountBySearchWord(searchWord);
         List<Goods> goodsList = goodsDao.queryBySearchWord(searchWord, 12 * pageIndex, 12);
 

@@ -3,11 +3,9 @@ package com.guimei.shop.action;
 import com.guimei.shop.bean.Customer;
 import com.guimei.shop.bean.Seller;
 import com.guimei.shop.dao.CustomerDao;
+import com.guimei.shop.dao.DaoFactory;
 import com.guimei.shop.dao.SellerDao;
-import com.guimei.shop.dao.impl.CustomerDaoImpl;
-import com.guimei.shop.dao.impl.SellerDaoImpl;
-import com.guimei.shop.framework.ActionClass;
-import com.wang.java_util.MathUtil;
+import com.guimei.shop.framework.ActionSupport;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
@@ -15,7 +13,7 @@ import java.io.IOException;
 /**
  * by wangrongjun on 2017/6/17.
  */
-public class LoginAction extends ActionClass {
+public class LoginAction extends ActionSupport {
     @Override
     protected String execute() throws ParamErrorException, ServletException, IOException {
         String phone = checkStringParameter("phone");
@@ -23,7 +21,7 @@ public class LoginAction extends ActionClass {
         String identity = checkStringParameter("identity");
 
         if (identity.equals("customer")) {// 如果是客户登录
-            CustomerDao customerDao = new CustomerDaoImpl();
+            CustomerDao customerDao = DaoFactory.getCustomerDao();
             Customer customer = customerDao.query(phone, password);
             if (customer != null) {
                 request.getSession().invalidate();
@@ -34,7 +32,7 @@ public class LoginAction extends ActionClass {
                 return "login.jsp";
             }
         } else {// 如果是商家登录
-            SellerDao sellerDao = new SellerDaoImpl();
+            SellerDao sellerDao = DaoFactory.getSellerDao();
             Seller seller = sellerDao.query(phone, password);
             if (seller != null) {
                 request.getSession().invalidate();

@@ -2,10 +2,9 @@ package com.guimei.shop.action;
 
 import com.guimei.shop.bean.Evaluate;
 import com.guimei.shop.bean.Goods;
+import com.guimei.shop.dao.DaoFactory;
 import com.guimei.shop.dao.EvaluateDao;
 import com.guimei.shop.dao.GoodsDao;
-import com.guimei.shop.dao.impl.EvaluateDaoImpl;
-import com.guimei.shop.dao.impl.GoodsDaoImpl;
 import com.guimei.shop.framework.Action;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,9 +25,9 @@ public class QueryGoodsInfoAction implements Action {
             return "index.jsp";
         }
 
-        GoodsDao goodsDao = new GoodsDaoImpl();
+        GoodsDao goodsDao = DaoFactory.getGoodsDao();
         Goods goods = goodsDao.queryById(goodsId);
-        EvaluateDao evaluateDao = new EvaluateDaoImpl();
+        EvaluateDao evaluateDao = DaoFactory.getEvaluateDao();
         List<Evaluate> evaluateList = evaluateDao.queryByGoodsId(goodsId);
         request.setAttribute("goods", goods);
         request.setAttribute("evaluateList", evaluateList);
